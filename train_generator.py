@@ -136,3 +136,5 @@ for epoch in range(args.epoch):
 
         if total_step >= args.warmup and total_step % args.kl_anneal_iter == 0:
             beta = min(args.max_beta, beta + args.step_beta)
+ckpt = (model.state_dict(), optimizer.state_dict(), total_step, beta)
+torch.save(ckpt, os.path.join(args.save_dir, f"model.ckpt"))
